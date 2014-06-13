@@ -1,0 +1,617 @@
+body{
+    background: #EFEFEF;
+    margin: 0px;
+    font-family: "微软雅黑", "黑体", Arial, "Times New Roman", Verdana;
+}
+.zyupHidden{
+    display: none;
+}
+/*************作品上传****************/
+.zyupScreen .zyupForm {
+    padding: 20px;
+    background: #fff;
+    width: 950px;
+    margin: auto;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+}
+
+/**************头部*********/
+.zyupTab {
+    padding: 40px 0 0 0;
+    width: 600px;
+    margin: auto;
+    font-size: 0;
+    white-space: nowrap;
+}
+.zyupTab ol{
+    margin: 0px;
+    padding:0px;
+}
+.zyupTab li {
+    display: inline-block;
+    width: 33.3%;
+    border: #ccc 1px solid;
+    border-bottom: none;
+    margin-left: -1px;
+}
+
+.zyupTab li a {
+    display: inline-block;
+    height: 60px;
+    line-height: 60px;
+    color: #ccc;
+    width: 100%;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    position: relative;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    cursor: default;
+    color: #666;
+    cursor: pointer;
+    /*渐变色*/
+    background: #efefef; /* Old browsers */
+    background: -moz-linear-gradient(top, #efefef 0%, #cccccc 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #efefef), color-stop(100%, #cccccc)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #efefef 0%, #cccccc 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #efefef 0%, #cccccc 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #efefef 0%, #cccccc 100%); /* IE10+ */
+    background: linear-gradient(to bottom, #efefef 0%, #cccccc 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#efefef', endColorstr='#cccccc', GradientType=0); /* IE6-9 */
+
+}
+.zyupTab li a:hover {
+    color: #390;
+}
+.zyupTab li a.zyupStepCurrent {
+    background: url(../../images/app/zyupNavActiveBg.png) no-repeat;
+    color: #390;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+.zyupTab li:not(:last-child) a:after{
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 13px;
+    background: url(../../images/app/zyupTriangleRight.png) no-repeat;
+    position: absolute;
+    top: 50%;
+    right: 30px;
+    margin-top: -7px;
+}
+
+
+/*****上传第一步******/
+.zyupStepPanel1 {
+    position: relative;
+    min-height: 500px;
+    padding-right: 440px;
+}
+.zyupStepPanel1 label {
+    font-size: 12px;
+    font-weight: bold;
+    margin: 10px 0;
+    display: block;
+}
+.zyupStepPanel1 .zyupTip{
+    font-size:12px;
+    color:#666;
+}
+.zyupStepPanel1 .zyupField{
+    margin: 10px 0px 10px 0px;
+}
+.zyupStepPanel1 .zyupInputGray{
+    width: 100%;
+    height: 40px;
+    vertical-align: middle;
+    display: block;
+    padding: 0 10px;
+    background: #efefef;
+    border: none;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+.zyupStepPanel1 .zyupTagList {
+    height: auto;
+    min-height: 10px;
+}
+.zyupStepPanel1 .zyupTagList li {
+    display: inline;
+}
+.zyupStepPanel1 .zyupTagList li a {
+    font-size: 12px;
+    padding: 0 10px 0 30px;
+    line-height: 30px;
+    text-decoration: none;
+    color: #fff;
+    display: inline-block;
+    position: relative;
+    background: #390;
+    border-radius: 4px;
+    margin: 0 10px 10px 0;
+}
+
+.zyupStepPanel1 .zyupTagList li a:before {
+    content: "";
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background: url(../../images/app/zyupTagWhite.png) no-repeat;
+}
+
+.zyupStepPanel1 .zyupTagList li a:hover:before {
+    background: url(../../images/app/zyupDeleteWhite.png) no-repeat #C00;
+    border-radius: 10px;
+}
+
+.zyupStepPanel1 .zyupField textarea {
+    padding: 10px;
+    resize: vertical;
+    min-height: 60px;
+}
+
+.zyupStepPanel1 .zyupThumbContainer {
+    position: absolute;
+    top: 0;
+    margin: 0;
+    right: 0;
+    padding-left: 20px;
+    border-left: #ccc 1px dotted;
+}
+.zyupStepPanel1 .zyupThumbContainer .zyupTip{
+    position: absolute;
+    right: 0;
+    top: 26px;
+    width: 250px;
+    text-align: right;
+}
+
+.zyupStepPanel1 .zyupThumb {
+    display: block;
+}
+
+.zyupStepPanel1 .zyupThumbUploadBtn {
+    width: 100px;
+    margin-bottom: 10px;
+    display: inline-block;
+    font-size: 12px;
+    text-decoration: none;
+    height: 40px;
+    line-height: 40px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    color: #333;
+    font-weight: bold;
+    border: #bbb 1px solid;
+    padding: 0 10px;
+    background: linear-gradient(to bottom, #efefef 0%, #cccccc 100%);
+}
+.zyupStepPanel1 .zyupThumbUploadBtn:hover {
+    background: #ccc;
+}
+
+/*****上传第二步******/
+.zyupStepPanel2{
+    position: relative;
+}
+.zyupStepPanel2 .zyupColumn {
+    border: 1px solid #CECFCF;
+    overflow-y: hidden;
+    height: 500px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.zyupStepPanel2 .zyupColumnLeft {
+    width: 206px;
+    float: right;
+}
+.zyupStepPanel2 .zyupColumnRight {
+    margin-right: 206px;
+    position: relative;
+    border-right:none;
+}
+.zyupStepPanel2 .zyupColumnLeft .zyupColumnLeftHeader {
+    width: 100%;
+    height: 39px;
+    line-height:39px;
+    color:#fff;
+    text-indent:70px;
+    display: block;
+    cursor: pointer;
+    position:relative;
+    text-shadow:0 1px 1px rgba(0, 0, 0, 0.5);
+    background: #81d32a; /* Old browsers */
+    background: -moz-linear-gradient(top,  #81d32a 1%, #028900 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#81d32a), color-stop(100%,#028900)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #81d32a 1%,#028900 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #81d32a 1%,#028900 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #81d32a 1%,#028900 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #81d32a 1%,#028900 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#81d32a', endColorstr='#028900',GradientType=0 ); /* IE6-9 */
+
+}
+.zyupStepPanel2 .zyupColumnLeft .zyupColumnLeftHeader:before{
+    content:"";
+    width:30px;
+    height:30px;
+    background:url(../../images/app/zyupUploadBtnWhite.png) no-repeat;
+    position:absolute;
+    top:4px;
+    left:30px;
+}
+.zyupStepPanel2 .zyupColumnLeft .zyupUploadMenu {
+    position: absolute;
+    top: 40px;
+    width: 204px;
+    z-index: 3;
+    height: 280px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+    transition: height 0.5s ease-out;
+}
+.zyupStepPanel2 .zyupColumnLeft .zyupUploadMenu ul {
+    margin: 0;
+    padding: 0;
+}
+.zyupStepPanel2 .zyupColumnLeft .zyupUploadMenu li {
+    list-style-type: none;
+    margin-bottom: 0px;
+}
+.zyupStepPanel2 .zyupColumnLeft .zyupUploadMenu li>a {
+    display: inline-block;
+    width: 100%;
+    cursor: pointer;
+    height: 40px;
+    padding: 0 0 0 70px;
+    font-size: 16px;
+    line-height: 40px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    color: #666;
+}
+.zyupStepPanel2 .zyupColumnLeft .zyupUploadMenu li>a:hover {
+    color: #222;
+}
+.zyupStepPanel2 .zyupColumnLeft .zyupUploadTypes{
+    border-top: 1px solid #CECFCF;
+}
+.zyupStepPanel2 .zyupColumnLeft .zyupUploadTypes1 {
+    background: url(../../images/app/zyupUploadIconImg.png) no-repeat 30px center;
+}
+.zyupStepPanel2 .zyupColumnLeft .zyupUploadTypes2 {
+    background: url(../../images/app/zyupUploadIconWebVideo.png) no-repeat 30px center;
+}
+.zyupStepPanel2 .zyupColumnLeft .zyupUploadTypes3 {
+    background: url(../../images/app/zyupUploadIconLocalVideo.png) no-repeat 30px center;
+}
+.zyupStepPanel2 .zyupColumnLeft .zyupUploadTypes4 {
+    background: url(../../images/app/zyupUploadIcon3d.png) no-repeat 30px center;
+}
+.zyupStepPanel2 .zyupColumnLeft .zyupUploadTypes5 {
+    background: url(../../images/app/zyupUploadIconPpt.png) no-repeat 30px center;
+}
+.zyupStepPanel2 .zyupColumnLeft .zyupUploadTypes6 {
+    background: url(../../images/app/zyupUploadIconFile.png) no-repeat 30px center;
+}
+.zyupStepPanel2 .zyupColumnLeft .zyupUploadTypes7 {
+    background: url(../../images/app/zyupUploadIconFlash.png) no-repeat 30px center;
+}
+
+/* 设置滚动条的样式 */
+.zyupStepPanel2 .zyupColumnLeft .zyupMediaList::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* 滚动槽 */
+.zyupStepPanel2 .zyupColumnLeft .zyupMediaList::-webkit-scrollbar-track {
+    background: #ccc;
+}
+
+/* 滚动条滑块 */
+
+.zyupStepPanel2 .zyupColumnLeft .zyupMediaList::-webkit-scrollbar-thumb {
+    background: #999;
+}
+
+.zyupStepPanel2 .zyupColumnLeft .zyupMediaList {
+    margin: 0;
+    padding: 0px;
+    width: 204px;
+    list-style-position: inside;
+    list-style-type: decimal-leading-zero;
+    color: #336699;
+    position: absolute;
+    height: 460px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.zyupStepPanel2 .zyupColumnLeft .zyupMediaList li {
+    width: 100%;
+    white-space: nowrap;
+    height: 44px;
+    border: 1px solid #CECFCF;
+    margin: -1px 0 0 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    position: relative;
+}
+.zyupStepPanel2 .zyupColumnLeft .zyupMediaList li>a {
+    height: 42px;
+    display: inline-block;
+    vertical-align: middle;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 180px;
+}
+.zyupStepPanel2 .zyupColumnLeft .zyupUnCompleteLi {
+    background-color: #ddd !important;
+}
+.zyupStepPanel2 .zyupColumnLeft .zyupUnCompleteLi>.zyupSmallThumb {
+    position: absolute;
+    top: 0;
+    left: 20px;
+}
+.zyupStepPanel2 .zyupColumnLeft .zyupDelete {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background: url(../../images/app/zyupMediaDeleteWhite.png) #ccc center center no-repeat;
+    border-radius:15px;
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    top: 6px;
+}
+.zyupStepPanel2 .zyupColumnLeft .zyupDelete:hover{
+    background-color:#C00;
+}
+.zyupStepPanel2 .zyupColumnLeft .zyupSmallThumb {
+    width: 42px;
+    height: 42px;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.zyupStepPanel2 .zyupColumnLeft .zyupMediaFilename {
+    width: 90px;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 42px;
+    padding: 0 4px;
+    white-space: nowrap;
+    cursor: move;
+    font-size: 12px;
+    position: absolute;
+    left: 42px;
+    top: 0;
+}
+.zyupStepPanel2 .zyupColumnLeft .zyupPercent {
+    width: 104px;
+    display: inline-block;
+    font-size: 12px;
+    line-height: 42px;
+    padding: 0 4px;
+    position: absolute;
+    left: 42px;
+    top: 0;
+}
+.zyupStepPanel2 .zyupColumnLeft .zyupMediaList span {
+    color: #999999;
+}
+.zyupStepPanel2 .zyupColumnLeft .zyupMediaItemActive {
+    background-color: #F2F2F2;
+}
+.zyupStepPanel2 .zyupColumnLeft .zyupMediaItemError {
+    background-color: #FEEDE4;
+}
+.zyupStepPanel2 .zyupColumnLeft .zyupMediaList li:hover, .zyupMediaItemActive {
+    border-bottom: #ccc 1px solid;
+    box-shadow: 0 0 5px rgba(200, 200, 200, 1);
+    -webkit-box-shadow: 0 0 5px rgba(200, 200, 200, 1);
+    -moz-box-shadow: 0 0 5px rgba(200, 200, 200, 1);
+}
+.zyupStepPanel2 .zyupColumnLeft .zyupMediaItem {
+    width: 100%;
+    height: 100%;
+}
+.zyupStepPanel2 .zyupColumnRight .zyupMediaIframe {
+    width: 100%;
+    height: 460px;
+    border: none;
+}
+.zyupStepPanel2 .zyupColumnRight .zyupColumnRightHeader {
+    height: 39px;
+    width: 100%;
+    background-color: #f2f2f2;
+    border-bottom: 1px solid #CECFCF;
+}
+.zyupStepPanel2 .zyupColumnRight .zyupColumnRightHeader p{
+    margin: 0px;
+}
+.zyupStepPanel2 .zyupColumnRight .zyupColumnRightHeader p b {
+    margin: 10px 0 0 10px;
+    display: inline-block;
+    font-size: 16px;
+}
+
+
+/*****上传第三步******/
+.zyupStepPanel3 {
+    position: relative;
+    min-height: 500px;
+    width: 780px;
+    margin: auto;
+    padding-top: 100px;
+}
+
+.zyupStepPanel3 .zyupFormSubmitBtn {
+    position: absolute;
+    top: -20px;
+    right: 0;
+    width: 80px;
+    height: 128px;
+    padding-top: 40px;
+    border: none;
+    background: url(../../images/app/zyupSubmitBtn.png) no-repeat;
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    vertical-align: top;
+    font-family: "微软雅黑";
+    cursor: pointer;
+}
+.zyupStepPanel3 .zyupMainContent a{
+    position: relative;
+    display: inline-block;
+    width:100%;
+}
+.zyupStepPanel3 .zyupMainContent img{
+    width:100%;
+}
+.zyupStepPanel3 .zyupMainContent figcaption{
+    background: #bbbbbb;
+}
+
+/*************弹出层***************/
+.zyupShowMediaPanel{
+    position: fixed;
+    z-index: 9999;
+    background: #fff;
+    top:0;
+    left:0;
+    bottom:0;
+    width: 100%;
+}
+.zyupShowMediaPanel .zyupShowMediaPanelClose{
+    cursor: pointer;
+    position: fixed;
+    top: 0;
+    right: 10%;
+    display: inline-block;
+    font-size: 0;
+    width: 70px;
+    height: 70px;
+    background: url(../../images/app/zyupCloseGray.png) no-repeat;
+    z-index:10001;
+}
+.zyupShowMediaPanel  .zyupShowMediaPanelClose:hover {
+    background: url(../../images/app/zyupCloseWhite.png) no-repeat;
+}
+.zyupShowMediaPanel .zyupShowMediaPanelContent{
+    overflow-y:scroll;
+    width: 100%;
+    top:0;
+    bottom:0;
+    position:fixed;
+
+}
+.zyupShowMediaPanel .zyupShowMediaPanelContent .zyupShowMediaEl,
+.zyupShowMediaPanel .zyupShowMediaPanelContent iframe{
+    width: 100%;
+    height: 100%;
+    margin: auto;
+}
+.zyupShowMediaPanel .zyupShowMediaPanelContent img{
+    margin: auto;
+    display: block;
+    width:100%;
+}
+.zyupBlackout{
+    opacity:0.6;
+    position: fixed;
+    top:0px;
+    width: 100%;
+    height: 100%;
+    background: black;
+    z-index: 9998;
+}
+.zyupWebVideoPanel{
+    position: fixed;
+    top:200px;
+    left:20%;
+    width: 60%;
+    height: auto;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
+    background: white;
+}
+.zyupWebVideoPanel .zyupWebVideoPanelClose{
+    width: 30px;
+    height: 30px;
+    display: block;
+    margin-left:auto;
+    background: yellowgreen;
+    line-height: 30px;
+    text-align: center;
+    font-size: 30px;
+}
+.zyupWebVideoPanel .zyupWebVideoPanelClose:hover{
+    background: deepskyblue;
+    cursor: pointer;
+}
+.zyupWebVideoPanel .zyupWebVideoPanelContent{
+    padding:10px;
+}
+.zyupWebVideoPanel .zyupWebVideoInput{
+    width: 80%;
+    height: 20px;
+}
+.zyupWebVideoPanel .zyupWebVideoInputOk{
+    width: 50px;
+    height: 30px;
+    cursor: pointer;
+}
+.zyupWebVideoPanel .zyupWebVideoPanelContent .error{
+    display: block;
+    color: red;
+    font-size: 14px;
+}
+
+/*--------------------显示资源图标---------------------*/
+.zyupHasMedia:before{
+    content:"";
+    width: 50px;
+    height: 60px;
+    position: absolute;
+    left: 10px;
+    top:-6px;
+}
+.zyupHasLocalVideo:before{
+    background: url(../../images/app/zyupMediaFlagLocalVideo.png) no-repeat;
+}
+.zyupHasPpt:before{
+    background: url(../../images/app/zyupMediaFlagPpt.png) no-repeat;
+}
+.zyupHas3d:before{
+    background: url(../../images/app/zyupMediaFlag3d.png) no-repeat;
+}
+.zyupHasFile:before{
+    background: url(../../images/app/zyupMediaFlagFile.png) no-repeat;
+}
+.zyupHasWebVideo:before{
+    background: url(../../images/app/zyupMediaFlagWebVideo.png) no-repeat;
+}
+.zyupHasFlash:before{
+    background: url(../../images/app/zyupMediaFlagFlash.png) no-repeat;
+}
