@@ -41,33 +41,33 @@ var zyup=(function(){
         },
         mediaTypes:{
             thumb:"thumb",
-            image:"zy_image",
-            ppt:"zy_ppt",
-            _3d:"zy_3d",
-            localVideo:"zy_local_video",
-            file:"zy_file",
-            webVideo:"zy_web_video",
-            flash:"zy_flash"
+            image:"image",
+            ppt:"ppt",
+            _3d:"3d",
+            localVideo:"localVideo",
+            file:"file",
+            webVideo:"webVideo",
+            flash:"flash"
         },
         mediaTypesPrefix:{
-            image:"zy_image_",
-            ppt:"zy_ppt_",
-            _3d:"zy_3d_",
-            localVideo:"zy_local_video_",
-            file:"zy_file_",
-            webVideo:"zy_web_video_",
-            flash:"zy_flash_"
+            image:"image",
+            ppt:"ppt",
+            _3d:"3d",
+            localVideo:"localVideo",
+            file:"file",
+            webVideo:"webVideo",
+            flash:"flash"
         },
 
         //单个媒体对象的信息
         mediaObj:{
-            mediaTitle:"zy_media_title",
-            mediaMemo:"zy_media_memo",
-            mediaType:"zy_media_type",
-            mediaThumbFilename:"zy_media_thumb_filename",
-            mediaThumbFilepath:"zy_media_thumb_filepath",
-            mediaFilename:"zy_media_filename",
-            mediaFilepath:"zy_media_filepath"
+            mediaTitle:"mediaTitle",
+            mediaMemo:"mediaMemo",
+            mediaType:"mediaType",
+            mediaThumbFilename:"mediaThumbFilename",
+            mediaThumbFilepath:"mediaThumbFilepath",
+            mediaFilename:"mediaFilename",
+            mediaFilepath:"mediaFilepath"
         },
         mediaFilters:{
             imageFilter:"jpg,gif,png,jpeg",
@@ -395,6 +395,8 @@ var zyup=(function(){
         }
 
         uploadedMedias[mediaId][config.mediaObj.mediaType] = type;
+        uploadedMedias[mediaId][config.mediaObj.mediaTitle] = "";
+        uploadedMedias[mediaId][config.mediaObj.mediaMemo] = "";
     }
 
 

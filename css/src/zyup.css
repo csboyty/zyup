@@ -65,7 +65,7 @@ body{
     color: #390;
 }
 .zyupTab li a.zyupStepCurrent {
-    background: url(../../images/app/zyupNavActiveBg.png) no-repeat;
+    background: url(../../images/zyup/zyupNavActiveBg.png) no-repeat;
     color: #390;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 }
@@ -74,7 +74,7 @@ body{
     display: inline-block;
     width: 8px;
     height: 13px;
-    background: url(../../images/app/zyupTriangleRight.png) no-repeat;
+    background: url(../../images/zyup/zyupTriangleRight.png) no-repeat;
     position: absolute;
     top: 50%;
     right: 30px;
@@ -140,11 +140,11 @@ body{
     position: absolute;
     top: 5px;
     left: 5px;
-    background: url(../../images/app/zyupTagWhite.png) no-repeat;
+    background: url(../../images/zyup/zyupTagWhite.png) no-repeat;
 }
 
 .zyupStepPanel1 .zyupTagList li a:hover:before {
-    background: url(../../images/app/zyupDeleteWhite.png) no-repeat #C00;
+    background: url(../../images/zyup/zyupDeleteWhite.png) no-repeat #C00;
     border-radius: 10px;
 }
 
@@ -242,7 +242,7 @@ body{
     content:"";
     width:30px;
     height:30px;
-    background:url(../../images/app/zyupUploadBtnWhite.png) no-repeat;
+    background:url(../../images/zyup/zyupUploadBtnWhite.png) no-repeat;
     position:absolute;
     top:4px;
     left:30px;
@@ -287,25 +287,25 @@ body{
     border-top: 1px solid #CECFCF;
 }
 .zyupStepPanel2 .zyupColumnLeft .zyupUploadTypes1 {
-    background: url(../../images/app/zyupUploadIconImg.png) no-repeat 30px center;
+    background: url(../../images/zyup/zyupUploadIconImg.png) no-repeat 30px center;
 }
 .zyupStepPanel2 .zyupColumnLeft .zyupUploadTypes2 {
-    background: url(../../images/app/zyupUploadIconWebVideo.png) no-repeat 30px center;
+    background: url(../../images/zyup/zyupUploadIconWebVideo.png) no-repeat 30px center;
 }
 .zyupStepPanel2 .zyupColumnLeft .zyupUploadTypes3 {
-    background: url(../../images/app/zyupUploadIconLocalVideo.png) no-repeat 30px center;
+    background: url(../../images/zyup/zyupUploadIconLocalVideo.png) no-repeat 30px center;
 }
 .zyupStepPanel2 .zyupColumnLeft .zyupUploadTypes4 {
-    background: url(../../images/app/zyupUploadIcon3d.png) no-repeat 30px center;
+    background: url(../../images/zyup/zyupUploadIcon3d.png) no-repeat 30px center;
 }
 .zyupStepPanel2 .zyupColumnLeft .zyupUploadTypes5 {
-    background: url(../../images/app/zyupUploadIconPpt.png) no-repeat 30px center;
+    background: url(../../images/zyup/zyupUploadIconPpt.png) no-repeat 30px center;
 }
 .zyupStepPanel2 .zyupColumnLeft .zyupUploadTypes6 {
-    background: url(../../images/app/zyupUploadIconFile.png) no-repeat 30px center;
+    background: url(../../images/zyup/zyupUploadIconFile.png) no-repeat 30px center;
 }
 .zyupStepPanel2 .zyupColumnLeft .zyupUploadTypes7 {
-    background: url(../../images/app/zyupUploadIconFlash.png) no-repeat 30px center;
+    background: url(../../images/zyup/zyupUploadIconFlash.png) no-repeat 30px center;
 }
 
 /* 设置滚动条的样式 */
@@ -375,7 +375,7 @@ body{
     display: inline-block;
     width: 30px;
     height: 30px;
-    background: url(../../images/app/zyupMediaDeleteWhite.png) #ccc center center no-repeat;
+    background: url(../../images/zyup/zyupMediaDeleteWhite.png) #ccc center center no-repeat;
     border-radius:15px;
     cursor: pointer;
     position: absolute;
@@ -473,7 +473,7 @@ body{
     height: 128px;
     padding-top: 40px;
     border: none;
-    background: url(../../images/app/zyupSubmitBtn.png) no-repeat;
+    background: url(../../images/zyup/zyupSubmitBtn.png) no-repeat;
     color: #fff;
     font-size: 20px;
     font-weight: bold;
@@ -512,11 +512,11 @@ body{
     font-size: 0;
     width: 70px;
     height: 70px;
-    background: url(../../images/app/zyupCloseGray.png) no-repeat;
+    background: url(../../images/zyup/zyupCloseGray.png) no-repeat;
     z-index:10001;
 }
 .zyupShowMediaPanel  .zyupShowMediaPanelClose:hover {
-    background: url(../../images/app/zyupCloseWhite.png) no-repeat;
+    background: url(../../images/zyup/zyupCloseWhite.png) no-repeat;
 }
 .zyupShowMediaPanel .zyupShowMediaPanelContent{
     overflow-y:scroll;
@@ -598,20 +598,20 @@ body{
     top:-6px;
 }
 .zyupHasLocalVideo:before{
-    background: url(../../images/app/zyupMediaFlagLocalVideo.png) no-repeat;
+    background: url(../../images/zyup/zyupMediaFlagLocalVideo.png) no-repeat;
 }
 .zyupHasPpt:before{
-    background: url(../../images/app/zyupMediaFlagPpt.png) no-repeat;
+    background: url(../../images/zyup/zyupMediaFlagPpt.png) no-repeat;
 }
 .zyupHas3d:before{
-    background: url(../../images/app/zyupMediaFlag3d.png) no-repeat;
+    background: url(../../images/zyup/zyupMediaFlag3d.png) no-repeat;
 }
 .zyupHasFile:before{
-    background: url(../../images/app/zyupMediaFlagFile.png) no-repeat;
+    background: url(../../images/zyup/zyupMediaFlagFile.png) no-repeat;
 }
 .zyupHasWebVideo:before{
-    background: url(../../images/app/zyupMediaFlagWebVideo.png) no-repeat;
+    background: url(../../images/zyup/zyupMediaFlagWebVideo.png) no-repeat;
 }
 .zyupHasFlash:before{
-    background: url(../../images/app/zyupMediaFlagFlash.png) no-repeat;
+    background: url(../../images/zyup/zyupMediaFlagFlash.png) no-repeat;
 }
