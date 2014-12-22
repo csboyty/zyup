@@ -6,6 +6,28 @@ body{
 .zyupHidden{
     display: none;
 }
+.zyupButton {
+    width: 100px;
+    margin-bottom: 10px;
+    display: inline-block;
+    font-size: 12px;
+    text-decoration: none;
+    height: 40px;
+    line-height: 40px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    color: #333;
+    font-weight: bold;
+    border: #bbb 1px solid;
+    padding: 0 10px;
+    background: linear-gradient(to bottom, #efefef 0%, #cccccc 100%);
+}
+.zyupButton:hover {
+    background: #ccc;
+    cursor: pointer;
+}
 /*************作品上传****************/
 .zyupScreen .zyupForm {
     padding: 20px;
@@ -174,28 +196,6 @@ body{
     display: block;
 }
 
-.zyupStepPanel1 .zyupThumbUploadBtn {
-    width: 100px;
-    margin-bottom: 10px;
-    display: inline-block;
-    font-size: 12px;
-    text-decoration: none;
-    height: 40px;
-    line-height: 40px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    text-align: center;
-    color: #333;
-    font-weight: bold;
-    border: #bbb 1px solid;
-    padding: 0 10px;
-    background: linear-gradient(to bottom, #efefef 0%, #cccccc 100%);
-}
-.zyupStepPanel1 .zyupThumbUploadBtn:hover {
-    background: #ccc;
-}
-
 /*****上传第二步******/
 .zyupStepPanel2{
     position: relative;
@@ -247,66 +247,6 @@ body{
     top:4px;
     left:30px;
 }
-.zyupStepPanel2 .zyupColumnLeft .zyupUploadMenu {
-    position: absolute;
-    top: 40px;
-    width: 204px;
-    z-index: 3;
-    height: 280px;
-    overflow: hidden;
-    background: #fff;
-    box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
-    transition: height 0.5s ease-out;
-}
-.zyupStepPanel2 .zyupColumnLeft .zyupUploadMenu ul {
-    margin: 0;
-    padding: 0;
-}
-.zyupStepPanel2 .zyupColumnLeft .zyupUploadMenu li {
-    list-style-type: none;
-    margin-bottom: 0px;
-}
-.zyupStepPanel2 .zyupColumnLeft .zyupUploadMenu li>a {
-    display: inline-block;
-    width: 100%;
-    cursor: pointer;
-    height: 40px;
-    padding: 0 0 0 70px;
-    font-size: 16px;
-    line-height: 40px;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -ms-box-sizing: border-box;
-    box-sizing: border-box;
-    color: #666;
-}
-.zyupStepPanel2 .zyupColumnLeft .zyupUploadMenu li>a:hover {
-    color: #222;
-}
-.zyupStepPanel2 .zyupColumnLeft .zyupUploadTypes{
-    border-top: 1px solid #CECFCF;
-}
-.zyupStepPanel2 .zyupColumnLeft .zyupUploadTypes1 {
-    background: url(../../images/zyup/zyupUploadIconImg.png) no-repeat 30px center;
-}
-.zyupStepPanel2 .zyupColumnLeft .zyupUploadTypes2 {
-    background: url(../../images/zyup/zyupUploadIconWebVideo.png) no-repeat 30px center;
-}
-.zyupStepPanel2 .zyupColumnLeft .zyupUploadTypes3 {
-    background: url(../../images/zyup/zyupUploadIconLocalVideo.png) no-repeat 30px center;
-}
-.zyupStepPanel2 .zyupColumnLeft .zyupUploadTypes4 {
-    background: url(../../images/zyup/zyupUploadIcon3d.png) no-repeat 30px center;
-}
-.zyupStepPanel2 .zyupColumnLeft .zyupUploadTypes5 {
-    background: url(../../images/zyup/zyupUploadIconPpt.png) no-repeat 30px center;
-}
-.zyupStepPanel2 .zyupColumnLeft .zyupUploadTypes6 {
-    background: url(../../images/zyup/zyupUploadIconFile.png) no-repeat 30px center;
-}
-.zyupStepPanel2 .zyupColumnLeft .zyupUploadTypes7 {
-    background: url(../../images/zyup/zyupUploadIconFlash.png) no-repeat 30px center;
-}
 
 /* 设置滚动条的样式 */
 .zyupStepPanel2 .zyupColumnLeft .zyupMediaList::-webkit-scrollbar {
@@ -319,7 +259,6 @@ body{
 }
 
 /* 滚动条滑块 */
-
 .zyupStepPanel2 .zyupColumnLeft .zyupMediaList::-webkit-scrollbar-thumb {
     background: #999;
 }
@@ -362,14 +301,6 @@ body{
     top: 0;
     left: 0;
     width: 180px;
-}
-.zyupStepPanel2 .zyupColumnLeft .zyupUnCompleteLi {
-    background-color: #ddd !important;
-}
-.zyupStepPanel2 .zyupColumnLeft .zyupUnCompleteLi>.zyupSmallThumb {
-    position: absolute;
-    top: 0;
-    left: 20px;
 }
 .zyupStepPanel2 .zyupColumnLeft .zyupDelete {
     display: inline-block;
@@ -422,9 +353,6 @@ body{
 .zyupStepPanel2 .zyupColumnLeft .zyupMediaItemActive {
     background-color: #F2F2F2;
 }
-.zyupStepPanel2 .zyupColumnLeft .zyupMediaItemError {
-    background-color: #FEEDE4;
-}
 .zyupStepPanel2 .zyupColumnLeft .zyupMediaList li:hover, .zyupMediaItemActive {
     border-bottom: #ccc 1px solid;
     box-shadow: 0 0 5px rgba(200, 200, 200, 1);
@@ -435,11 +363,11 @@ body{
     width: 100%;
     height: 100%;
 }
-.zyupStepPanel2 .zyupColumnRight .zyupMediaIframe {
-    width: 100%;
-    height: 460px;
-    border: none;
-}
+
+
+/*
+*设置上传的媒体文件
+*/
 .zyupStepPanel2 .zyupColumnRight .zyupColumnRightHeader {
     height: 39px;
     width: 100%;
@@ -454,7 +382,185 @@ body{
     display: inline-block;
     font-size: 16px;
 }
+.zyupStepPanel2 .zyupColumnRight .zyupContent{
+    white-space:nowrap;
+    font-size:0;
+    font-family:"微软雅黑";
+}
+.zyupStepPanel2 .zyupColumnRight .zyupColumn50{
+    width: 50%;
+    display: inline-block;
+    vertical-align:top;
+    padding:20px;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+    -ms-box-sizing:border-box;
+    box-sizing:border-box;
+}
+.zyupStepPanel2 .zyupColumnRight .zyupSectionHeading{
+    font-size:16px;
+    color:#333;
+    font-weight:bold;
+    display: block;
+}
+.zyupStepPanel2 .zyupColumnRight .zyupToolbar{
+    width:100%;
+    min-height:60px;
+    position:relative;
+    /*padding:10px 0;*/
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+    -ms-box-sizing:border-box;
+    box-sizing:border-box;
+}
+.zyupStepPanel2 .zyupColumnRight .zyupTooltips{
+    margin-right:110px;
+    font-size:12px;
+    color:#3399cc;
+    position: relative;
+    white-space:normal;
+}
+.zyupStepPanel2 .zyupColumnRight  span.zyupTooltips{
+    margin-left:10px;
+}
+.zyupStepPanel2 .zyupColumnRight .zyupUpdateThumbnail{
+    position: absolute;
+    top:0;
+    right:0;
+}
+.zyupStepPanel2 .zyupColumnRight .zyupFileInfo{
+    width: 200px;
+    display: inline-block;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    height: 30px;
+    line-height: 30px;
+    vertical-align:top;
+    white-space:nowrap;
+    font-size: 12px;
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    -ms-box-sizing:border-box;
+    box-sizing:border-box;
+}
+.zyupStepPanel2 .zyupColumnRight .zyupChangeDiv{
+    position:absolute;
+    top: 10px;
+    width: 100%;
+    background: #fff;
+}
+.zyupStepPanel2 .zyupColumnRight .zyupMediaThumb{
+    width: 100%;
+    height: auto;
+}
 
+.zyupStepPanel2 .zyupColumnRight .zyupAddMediaMenu {
+    position: absolute;
+    top: 130px;
+    right:30px;
+    width: 206px;
+    z-index: 3;
+    height: 0;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+.zyupStepPanel2 .zyupColumnRight .zyupAddMediaMenuActive{
+    height: 120px;
+}
+.zyupStepPanel2 .zyupColumnRight .zyupAddMediaMenu ul {
+    margin: 0;
+    padding:0px;
+}
+.zyupStepPanel2 .zyupColumnRight .zyupAddMediaMenu li {
+    list-style-type: none;
+    margin-bottom: 0px;
+}
+.zyupStepPanel2 .zyupColumnRight .zyupAddMediaMenu li>a {
+    display: inline-block;
+    width: 100%;
+    cursor: pointer;
+    height: 60px;
+    padding: 0 0 0 65px;
+    font-size: 12px;
+    line-height: 60px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    color: #666;
+}
+.zyupStepPanel2 .zyupColumnRight .zyupAddMediaMenu li>a:hover {
+    color: #09bc72;
+}
+.zyupStepPanel2 .zyupColumnRight .zyupTypes {
+    border-top: 1px dotted #CECFCF;
+}
+.zyupStepPanel2 .zyupColumnRight .zyupTypes1 {
+    background: url(../../images/zyup/zyupUploadIconLocalVideo.png) no-repeat 10px center;
+}
+.zyupStepPanel2 .zyupColumnRight .zyupTypes2 {
+    background: url(../../images/zyup/zyupUploadIconFile.png) no-repeat 10px center;
+}
+.zyupStepPanel2 .zyupColumnRight .zyupTypes3 {
+    background: url(../../images/zyup/zyupUploadIconFlash.png) no-repeat 10px center;
+}
+.zyupStepPanel2 .zyupColumnRight .zyupBindFile{
+    height: 40px;
+    font-size: 14px;
+    margin-top: 10px;
+    line-height: 40px;
+    position: relative;
+}
+.zyupStepPanel2 .zyupColumnRight .zyupBindFileInfo{
+    font-size: 14px;
+    margin: 10px 0px;
+    background: #ccc;
+    padding:5px 0px;
+    position: relative;
+    height: 20px;
+    line-height: 20px;
+}
+.zyupStepPanel2 .zyupColumnRight .zyupBindFileName{
+    width: 80%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+}
+.zyupStepPanel2 .zyupColumnRight .zyupDeleteBindFile{
+    color: red;
+    cursor: pointer;
+    position: absolute;
+    right:5px;
+}
+.zyupStepPanel2 .zyupColumnRight .zyupInputText{
+    display: block;
+    width: 100%;
+    height: 30px;
+    margin: 5px 0px 35px 0px;
+    border: 1px solid #dfdfdf;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+    -ms-box-sizing:border-box;
+    box-sizing:border-box;
+    box-shadow:inset 0 0 10px rgba(0,0,0,0.05);
+    padding:2px;
+}
+
+.zyupStepPanel2 .zyupColumnRight .zyupTextareaInput{
+    display: block;
+    width: 100%;
+    height: 150px;
+    margin: 15px 0px 0px 0px;
+    padding:2px;
+    border: 1px solid #dfdfdf;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+    -ms-box-sizing:border-box;
+    box-sizing:border-box;
+    box-shadow:inset 0 0 10px rgba(0,0,0,0.05);
+}
 
 /*****上传第三步******/
 .zyupStepPanel3 {

@@ -7,14 +7,11 @@
     <script type="text/javascript" src="js/lib/jquery-2.0.3.min.js"></script>
     <script type="text/javascript" src="js/lib/jquery.form.js"></script>
     <script type="text/javascript" src="js/lib/juicer-min.js"></script>
-    <script type="text/javascript" src="js/lib/plupload.js"></script>
-    <script type="text/javascript" src="js/lib/plupload.html5.js"></script>
-    <script type="text/javascript" src="js/lib/plupload.flash.js"></script>
+    <script type="text/javascript" src="js/lib/plupload.full.min.js"></script>
     <script type="text/javascript" src="js/src/zyup.js"></script>
     <script type="text/javascript" src="js/src/zyupEvent.js"></script>
 </head>
 <body>
-
 <!--    上传标签   -->
 <script type="text/template" id="zyupTagTpl">
     <li><input type="hidden" name="terms[]" value="${text}"><a href="#">${text}</a></li>
@@ -24,26 +21,16 @@
     <li><input type="hidden" name="terms[]" value="${t}"><a href="#">${t}</a></li>
     {@/each}
 </script>
-<!-- 上传未完成的html模版-->
-<script type="text/template" id="zyupUnCompleteLiTpl">
-    <li data-filename="${filename}" class="zyupUnCompleteLi" data-media-id="${mediaId}">
-        <img class="zyupSmallThumb" src="${thumbSrc}">
-        <span class="zyupPercent">0%</span>
-        <span data-status="unComplete" class="zyupDelete"></span>
-    </li>
-</script>
 <!-- 上传完成的html模版-->
 <script type="text/template" id="zyupCompleteLiTpl">
-    <li class="zyupMediaItem ${classString}" data-media-type="${mediaType}" data-media-id='${mediaId}'
-        href="${iframeSrc}" draggable="true">
+    <li class="zyupMediaItem" data-media-id='${mediaId}'
+        draggable="true">
         <img class="zyupSmallThumb" src="${thumbSrc}">
         <span title='${filename}' class="zyupMediaFilename">${filename}</span>
-        <span data-status="complete" class="zyupDelete"></span>
+        <span class="zyupDelete zyupHidden"></span>
     </li>
 </script>
-<script type="text/template" id="zyupUploadIframeTpl">
-    <iframe id="zyupMediaIframe" name="zyupMediaIframe" class="zyupMediaIframe" src="${src}"></iframe>
-</script>
+
 <!--预览-->
 <script type="text/template" id="zyupUploadPreviewTpl">
     <h2>${title}</h2>
@@ -66,36 +53,6 @@
     </div>
 </script>
 
-<!--播放媒体文件-->
-<script type="text/template" id="zyupShowVideoTpl">
-    <video class="zyupShowMediaEl" autoplay controls src="${content}"></video>
-</script>
-<script type="text/template" id="zyupShowSpecialVideoTpl">
-    <object class="zyupShowMediaEl" type="application/x-shockwave-flash" data="js/lib/dplayer.swf" height="100%" width="100%" id="9144" style="visibility: visible;">
-        <param name="menu" value="false">
-        <param name="allowFullScreen" value="true">
-        <param name="allowscriptaccess" value="sameDomain">
-        <param name="flashvars" value="media_link=${content}">
-    </object>
-</script>
-<script type="text/template" id="zyupShowFlashTpl">
-    <object class="zyupShowMediaEl" type="application/x-shockwave-flash" data="${content}"height="100%" width="100%" id="9144" style="visibility: visible;">
-    </object>
-</script>
-<script type="text/template" id="zyupShowImageTpl">
-    <img src="${content}">
-</script>
-<script type="text/template" id="zyupShowWebVideoTpl">
-    $${content}
-</script>
-<script type="text/template" id="zyupShowPptTpl">
-    $${content}
-</script>
-<script type="text/template" id="zyupShow3dTpl">
-
-</script>
-
-
 <!--上传模块-->
 <section class="zyupScreen">
     <nav class="zyupTab" id="zyupTab">
@@ -106,7 +63,7 @@
         </ol>
     </nav>
     <form class="zyupForm" id="zyupForm">
-        <div class="zyupStepPanel zyupStepPanel1" id="zyupStep1">
+        <div class="zyupStepPanel zyupStepPanel1 " id="zyupStep1">
             <div class="zyupField">
                 <label for="zyupTitleInput">标题</label>
                 <input type="text" autocomplete="default" maxlength="80" value="" class="zyupInputGray"
@@ -118,7 +75,7 @@
                 </ul>
                 <p class="zyupTip">在下方输入标签，按回车确认。</p>
                 <input type="text" autocomplete="default" value="" class="zyupInputGray zyupTagInput " maxlength="20" name="zyupTagInput"
-                   id="zyupTagInput" placeholder="新标签...">
+                       id="zyupTagInput" placeholder="新标签...">
             </div>
             <div class="zyupField">
                 <label for="zyupDescriptionTxt">内容说明</label>
@@ -127,7 +84,7 @@
             </div>
             <div class="zyupThumbContainer" id="zyupThumbContainer">
                 <span class="zyupTip">请上传高宽比为1:1的jpg或png图像。</span>
-                <a href="#" class="zyupThumbUploadBtn" id="zyupThumbUploadBtn">上传缩略图</a>
+                <a href="#" class="zyupButton" id="zyupThumbUploadBtn">上传缩略图</a>
 
                 <img class="zyupThumb" id="zyupThumb" width="400" height="400" src="images/zyup/zyupDefaultThumb.png"/>
                 <input type="hidden" name="previewFilename" id="zyupThumbName">
@@ -138,28 +95,53 @@
 
         <!-- step 2-->
         <div class="zyupStepPanel zyupStepPanel2 zyupHidden" id="zyupStep2">
-            <div class="zyupColumn zyupColumnLeft">
-                <span class="zyupColumnLeftHeader" id="zyupShowUploadMenu">添加文件</span>
-                <!--媒体文件类型的menu-->
+            <div class="zyupColumn zyupColumnLeft" id="zyupUploadImageContainer">
+                <span class="zyupColumnLeftHeader" id="zyupUploadImage">上传图片</span>
 
-                <div id="zyupUploadMenu" class="zyupUploadMenu">
-                    <ul>
-                        <li><a id="zyupUploadImage" class="zyupUploadTypes zyupUploadTypes1">图片</a></li>
-                        <li><a id="zyupUploadWebVideo" class="zyupUploadTypes zyupUploadTypes2">网络视频</a></li>
-                        <li><a id="zyupUploadLocalVideo" class="zyupUploadTypes zyupUploadTypes3">本地视频</a></li>
-                        <li><a id="zyupUpload3d" class="zyupUploadTypes zyupUploadTypes4">3D文件</a></li>
-                        <li><a id="zyupUploadPpt" class="zyupUploadTypes zyupUploadTypes5">ppt文件</a></li>
-                        <li><a id="zyupUploadFile" class="zyupUploadTypes zyupUploadTypes6">文件</a></li>
-                        <li><a id="zyupUploadFlash" class="zyupUploadTypes zyupUploadTypes7">flash</a></li>
-                    </ul>
-                </div>
                 <ol id="zyupMediaList" class="zyupMediaList"></ol>
             </div>
             <div class="zyupColumn zyupColumnRight" id="zyupColumnRight">
                 <header class="zyupColumnRightHeader">
-                    <p><b id="zyupCurrentType">图片</b></p>
+                    <p><b id="zyupCurrentType">设置</b></p>
                 </header>
-
+                <article class="zyupContent zyupHidden" id="zyupContent">
+                    <section  class="zyupColumn50">
+                        <section id="zyupLeftBottom">
+                            <div class="zyupToolbar" id="zyupUpdateThumbContainer">
+                                <label class="zyupSectionHeading">缩略图</label>
+                                <input type="button" id="zyupUpdateThumbButton"
+                                       class="zyupButton zyupUpdateThumbnail" value="更换">
+                                <div class="zyupTooltips">限2M以内的jpg或png</div>
+                            </div>
+                            <img src="images/zyup/zyupDefaultThumb.png" id="zyupMediaThumb" class="zyupMediaThumb">
+                        </section>
+                    </section>
+                    <section id="zyupRight" class="zyupColumn50">
+                        <section class="zyupBindFileContainer">
+                            <label class="zyupSectionHeading">绑定媒体文件<span class="zyupTooltips">(可选)</span></label>
+                            <span class="zyupButton zyupBindFile" id="zyupBindFile">添加文件</span>
+                            <!--媒体文件类型的menu-->
+                            <ul id="zyupAddMediaMenu" class="zyupAddMediaMenu">
+                                <li><a id="zyupUploadMp4" class="zyupTypes1 zyupTypes">视频（MP4）</a></li>
+                                <li><a id="zyupUpload3D" class="zyupTypes2 zyupTypes">3D环境（ZIP）</a></li>
+                            </ul>
+                            <div class="zyupBindFileInfo zyupHidden" id="zyupBindFileInfo">
+                                <span class="zyupBindFileName" title="文件名" id="zyupBindFileName">
+                                    文件名文件名文件名文件名文件名文件名文件名文件名文件名文件名文件名文件名
+                                </span>
+                                <span class="zyupDeleteBindFile" id="zyupDeleteBindFile">删除</span>
+                            </div>
+                        </section>
+                        <section>
+                            <label class="zyupSectionHeading">标题<span class="zyupTooltips">(可选)</span></label>
+                            <input  maxlength="80" type="text" id="zyupMediaTitle" class="zyupInputText">
+                        </section>
+                        <section >
+                            <label class="zyupSectionHeading">描述<span class="zyupTooltips">(可选)</span></label>
+                            <textarea class="zyupTextareaInput" id="zyupMediaMemo"></textarea>
+                        </section>
+                    </section>
+                </article>
             </div>
         </div>
 
