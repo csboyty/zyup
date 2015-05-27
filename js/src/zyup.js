@@ -29,14 +29,22 @@ var zyup=(function(){
             smallThumb:"images/app/zyupDefaultSmallThumb.png"
         },
         ajaxUrls:{
-            uploadFileUrl:"/zyup/upload.php",
             getEntityDetail:"#",
             getEntityMedias:"#",
             uploadFormAction:"#",
             uploadFormEditAction:"#"
         },
         uploader:{
-            swfUrl:"/zyup/js/plupload/plupload.flash.swf"
+            url:"/zyup/upload.php",
+            swfUrl:"/zyup/js/plupload/plupload.flash.swf",
+            sizes:{
+                all:"5120m",
+                img:"2m"
+            },
+            filters:{
+                all:"*",
+                img:"jpg,JPG,jpeg,JPEG,png,PNG"
+            }
         },
         mediaTypes:{
             thumb:"thumb",
@@ -107,13 +115,24 @@ var zyup=(function(){
     function showSuccessMessage(title,content){
         console.log(content);
     }
+    function showLoading(){
+        $("#zyupLoading").removeClass("zyupHidden");
+    }
+    function hideLoading(){
+        $("#zyupLoading").addClass("zyupHidden");
+    }
 
     /**
      * ajax后台返回错误处理===================
      * @param {Object} data 后台返回的数据对象
      */
     function ajaxReturnErrorHandler(data){
-        console.log("ajax error");
+        console.log(config.messages.networkError);
+        hideLoading();
+    }
+    function ajaxErrorHandler(){
+        console.log(config.messages.networkError);
+        hideLoading();
     }
 
 
@@ -328,7 +347,7 @@ var zyup=(function(){
             browse_button:params.uploadBtn,
             container:params.uploadContainer,
             multipart_params:params.multipartParams,
-            url:params.url,
+            url:config.uploader.url,
             flash_swf_url:config.uploader.swfUrl,
             filters : [
                 {title : "Media files", extensions : params.filter}
@@ -379,7 +398,7 @@ var zyup=(function(){
             var response = JSON.parse(res.response);
             if (response.success) {
                 if(typeof params.uploadedCb === "function"){
-                    params.uploadedCb(file,response,up);
+                    params.uploadedCb(response,file,up);
                 }
             } else {
                 showErrorMessage(config.messages.errorTitle,config.messages.uploadIOError);
@@ -436,7 +455,7 @@ var zyup=(function(){
                     var response = JSON.parse(info.response);
                     response.url=config.qiNiu.bucketDomain + response.key;
                     if(typeof params.uploadedCb === "function"){
-                        params.uploadedCb(file,response,up);
+                        params.uploadedCb(response,file,up);
                     }
                 },
                 'Error': function(up, err, errTip) {
@@ -626,10 +645,9 @@ var zyup=(function(){
                 multipartParams:null,
                 multiSelection:false,
                 uploadContainer:"zyupThumbContainer",
-                url:config.ajaxUrls.uploadFileUrl,
                 filesAddedCb:null,
                 progressCb:null,
-                uploadedCb:function(file,response){
+                uploadedCb:function(response,file){
                     //var imgSrc=response.url;
                     //var imgExt=imgSrc.substring(imgSrc.lastIndexOf("."),imgSrc.length);
                     //var imgSrc=imgSrc.substring(0,imgSrc.lastIndexOf("."))+config.imgSize.middle+img_ext;
@@ -650,7 +668,6 @@ var zyup=(function(){
                 multipartParams:null,
                 multiSelection:true,
                 uploadContainer:"zyupUploadImageContainer",
-                url:config.ajaxUrls.uploadFileUrl,
                 filesAddedCb:function(files){
                     var mediaId = "";
                     var fileLength=files.length;
@@ -679,7 +696,7 @@ var zyup=(function(){
                     $(".zyupMediaItem[data-media-id='" + fileIdToMediaId[file.id] + "']").
                         find(".zyupMediaFilename").html(file.percent + "%");
                 },
-                uploadedCb:function(file,response){
+                uploadedCb:function(response,file){
                     $(".zyupMediaItem[data-media-id='" + fileIdToMediaId[file.id] + "']").
                         find(".zyupMediaFilename").html(file.name).end().
                         find(".zyupDelete").removeClass("zyupHidden").end().find(".zyupSmallThumb").
@@ -700,7 +717,6 @@ var zyup=(function(){
                 multipartParams:null,
                 multiSelection:false,
                 uploadContainer:"zyupAddMediaMenu",
-                url:config.ajaxUrls.uploadFileUrl,
                 filesAddedCb:function(files,up){
                     uploadingMediaFile=files[0];
                     currentMediaUploader=up;
@@ -711,7 +727,7 @@ var zyup=(function(){
                 progressCb:function(file){
                     $("#zyupBindFileName").text(file.percent + "%");
                 },
-                uploadedCb:function(file,response,up){
+                uploadedCb:function(response,file,up){
                     uploadingMediaFile=null;
                     currentMediaUploader=null;
                     uploadedMedias[currentMediaId][config.mediaObj.mediaFilename]=file.name;
@@ -732,10 +748,9 @@ var zyup=(function(){
                 multipartParams:null,
                 multiSelection:false,
                 uploadContainer:"zyupUpdateThumbContainer",
-                url:config.ajaxUrls.uploadFileUrl,
                 filesAddedCb:null,
                 progressCb:null,
-                uploadedCb:function(file,response){
+                uploadedCb:function(response,file){
                     uploadedMedias[currentMediaId][config.mediaObj.mediaThumbFilename]=file.name;
                     uploadedMedias[currentMediaId][config.mediaObj.mediaThumbFilePath]=response.url;
                     $(".zyupMediaItem[data-media-id='" + currentMediaId + "']").
@@ -903,6 +918,7 @@ var zyup=(function(){
         ajaxUploadFormHandler:function(){
             var url=config.ajaxUrls.uploadFormAction;
             var assets=[];
+            showLoading();
             $(".zyupMediaItem").each(function(index,m){
                 uploadedMedias[$(this).data("media-id")][config.mediaObj.mediaPos]=index+1;
                 assets.push(uploadedMedias[$(this).data("media-id")]);
@@ -920,13 +936,16 @@ var zyup=(function(){
                 dataType:"json",
                 success:function (data) {
                     if(data.success){
-                        showSuccessMessage(config.messages.successTitle,config.messages.operationSuccess);
+                        showSuccessMessage(config.messages.successTitle,config.messages.optSuccRedirect);
+                        setTimeout(function(){
+                            window.location.href="admin/article";
+                        },3000);
                     }else{
                         ajaxReturnErrorHandler(data);
                     }
                 },
                 error:function (data) {
-                    showErrorMessage(config.messages.errorTitle,config.messages.networkError);
+                    ajaxErrorHandler();
                 }
             });
         },
