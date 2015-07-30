@@ -64,6 +64,7 @@
     </nav>
     <form class="zyupForm" id="zyupForm">
         <div class="zyupStepPanel zyupStepPanel1 " id="zyupStep1">
+            <input type="hidden" name="id" id="zyupEntityId">
             <div class="zyupField">
                 <label for="zyupTitleInput">标题</label>
                 <input type="text" autocomplete="default" maxlength="80" value="" class="zyupInputGray"
@@ -82,14 +83,25 @@
                 <textarea class="zyupInputGray" name="description" id="zyupDescriptionTxt"
                           placeholder=""></textarea>
             </div>
-            <div class="zyupThumbContainer" id="zyupThumbContainer">
-                <span class="zyupTip">请上传高宽比为1:1的jpg或png图像。</span>
-                <a href="#" class="zyupButton" id="zyupThumbUploadBtn">上传缩略图</a>
+            <div class="zyupRight">
+                <div class="zyupThumbContainer" id="zyupThumbContainer">
+                    <a href="#" class="zyupButton" id="zyupThumbUploadBtn">上传缩略图</a>
+                    <span class="zyupTip">300x300的jpg或png图像。</span>
+                    <img class="zyupThumb" id="zyupThumb" width="300" height="200"
+                         src="images/zyup/zyupDefaultThumb.png"/>
+                    <input type="hidden" value="{{artifact.preview_image}}" name="preview_image" id="zyupThumbUrl">
+                </div>
+                <br>
+                <div id="zyupFileContainer">
+                    <a href="#" class="zyupButton" id="zyupFileUploadBtn">上传附件</a>
+                    <span class="zyupTip">zip文件</span>
 
-                <img class="zyupThumb" id="zyupThumb" width="400" height="400" src="images/zyup/zyupDefaultThumb.png"/>
-                <input type="hidden" name="previewFilename" id="zyupThumbName">
-                <input type="hidden" name="previewLocation" id="zyupThumbUrl">
-                <input type="hidden" name="id" id="zyupEntityId">
+                    <br>
+                    <span id="zyupFilename"></span>
+                    <input type="hidden" value="" name="attachment_filename" id="zyupFilenameValue">
+                    <input type="hidden" value="" name="attachment_file" id="zyupFileUrl">
+                </div>
+
             </div>
         </div>
 

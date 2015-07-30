@@ -175,8 +175,7 @@ body{
     resize: vertical;
     min-height: 60px;
 }
-
-.zyupStepPanel1 .zyupThumbContainer {
+.zyupStepPanel1 .zyupRight {
     position: absolute;
     top: 0;
     margin: 0;
@@ -184,15 +183,13 @@ body{
     padding-left: 20px;
     border-left: #ccc 1px dotted;
 }
-.zyupStepPanel1 .zyupThumbContainer .zyupTip{
-    position: absolute;
-    right: 0;
+.zyupStepPanel1 .zyupRight .zyupTip{
+    vertical-align: top;
     top: 26px;
     width: 250px;
     text-align: right;
 }
-
-.zyupStepPanel1 .zyupThumb {
+.zyupStepPanel1 .zyupRight .zyupThumbContainer .zyupThumb{
     display: block;
 }
 
