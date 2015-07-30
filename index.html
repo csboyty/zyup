@@ -106,6 +106,7 @@
         </ol>
     </nav>
     <form class="zyupForm" id="zyupForm">
+        <input type="hidden" name="id" id="zyupEntityId">
         <div class="zyupStepPanel zyupStepPanel1" id="zyupStep1">
             <div class="zyupField">
                 <label for="zyupTitleInput">标题</label>
@@ -121,18 +122,44 @@
                    id="zyupTagInput" placeholder="新标签...">
             </div>
             <div class="zyupField">
+                <label for="zyupAuthorInput">作者</label>
+                <p class="zyupTip">多个作者请用英文逗号隔开。</p>
+                <input type="text"  maxlength="80" value="" class="zyupInputGray"
+                       name="author_txt" id="zyupAuthorInput">
+            </div>
+            <div class="zyupField">
+                <label for="zyupSizeInput">作品尺寸</label>
+                <input type="text"  maxlength="120" value="" class="zyupInputGray"
+                       name="size_txt" id="zyupSizeInput">
+            </div>
+            <div class="zyupField">
                 <label for="zyupDescriptionTxt">内容说明</label>
                 <textarea class="zyupInputGray" name="description" id="zyupDescriptionTxt"
                           placeholder=""></textarea>
             </div>
-            <div class="zyupThumbContainer" id="zyupThumbContainer">
-                <span class="zyupTip">请上传高宽比为1:1的jpg或png图像。</span>
-                <a href="#" class="zyupThumbUploadBtn" id="zyupThumbUploadBtn">上传缩略图</a>
+            <div class="zyupRight">
+                <div class="zyupThumbContainer" id="zyupThumbContainer">
+                    <a href="#" class="zyupButton" id="zyupThumbUploadBtn">上传缩略图</a>
+                    <span class="zyupTip">1:1的jpg或png图像。</span>
+                    <img class="zyupThumb" id="zyupThumb" width="300" height="200"
+                         src="images/zyup/zyupDefaultThumb.png"/>
+                    <input type="hidden" value="{{artifact.preview_image}}" name="preview_image" id="zyupThumbUrl">
+                </div>
+                <br>
+                <div id="zyupFileContainer">
+                    <a href="#" class="zyupButton" id="zyupFileUploadBtn">上传附件</a>
+                    <span class="zyupTip">zip文件</span>
 
-                <img class="zyupThumb" id="zyupThumb" width="400" height="400" src="images/zyup/zyupDefaultThumb.png"/>
-                <input type="hidden" name="previewFilename" id="zyupThumbName">
-                <input type="hidden" name="previewLocation" id="zyupThumbUrl">
-                <input type="hidden" name="id" id="zyupEntityId">
+                    <br>
+                    <span id="zyupFilename"></span>
+                    <input type="hidden" value="{{artifact.attachment_filename}}" name="attachment_filename" id="zyupFilenameValue">
+                    <input type="hidden" value="{{artifact.attachment_file}}" name="attachment_file" id="zyupFileUrl">
+                </div>
+                <div>
+                    <label for="zyupDescriptionTxt">设计分析*</label>
+                    <textarea class="zyupInputGray" style="min-height: 100px" name="analysis" id="zyupAnalysisTxt"
+                              placeholder=""></textarea>
+                </div>
             </div>
         </div>
 

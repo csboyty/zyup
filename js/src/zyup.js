@@ -13,6 +13,25 @@ var zyup=(function(){
     var step2UploaderInit=false;
 
     var config={
+        qiNiu:{
+            upTokenUrl:"qiniu-uptoken",
+            uploadDomain:"http://qiniu-plupload.qiniudn.com/",
+            bucketDomain:"http://7xjeh2.com1.z0.glb.clouddn.com/",
+            swfUrl:"static/js/frontend/lib/Moxie.swf"
+        },
+        uploader:{
+            url:"#",
+            swfUrl:"static/js/plupload/plupload.flash.swf",
+            sizes:{
+                all:"5120m",
+                img:"2m"
+            },
+            filters:{
+                all:"*",
+                zip:"zip,ZIP",
+                img:"jpg,JPG,jpeg,JPEG,png,PNG"
+            }
+        },
         thumbs:{
             defaultThumb:"images/app/zyupDefaultThumb.png",
             smallThumb:"images/app/zyupDefaultSmallThumb.png"
@@ -407,7 +426,7 @@ var zyup=(function(){
         var uploaderThumb = new plupload.Uploader({
             runtimes:"html5,flash",
             multi_selection:false,
-            max_file_size:config.sizes.maxImageSize,
+            max_file_size:config.uploader.sizes.maxImageSize,
             browse_button:"zyupThumbUploadBtn",
             container:"zyupThumbContainer",
             url:config.ajaxUrls.uploadFileUrl,
@@ -417,7 +436,7 @@ var zyup=(function(){
                 isThumb:true
             },
             filters:[
-                {title:"Image files", extensions:config.mediaFilters.imageFilter}
+                {title:"Image files", extensions:config.uploader.filters.imageFilter}
             ]
         });
 
@@ -470,7 +489,7 @@ var zyup=(function(){
         var uploaderMedia=new plupload.Uploader({
             runtimes:"html5,flash",
             multi_selection:true,
-            max_file_size:config.sizes.maxMediaSize,
+            max_file_size:config.uploader.sizes.maxMediaSize,
             browse_button:browseButton,
             container:"zyupUploadMenu",
             url:config.ajaxUrls.uploadFileUrl,
@@ -998,7 +1017,7 @@ var zyup=(function(){
                 },
                 dataType:"json",
                 success:function (data) {
-                    if(data.success&&data.resultCode==DE.config.resultCode.post_create_succ){
+                    if(data.success&&data.resultCode==config.resultCode.post_create_succ){
                         showSuccessMessage(config.messages.successTitle,config.messages.operationSuccess);
 
 

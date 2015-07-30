@@ -147,34 +147,7 @@ body{
     background: url(../../images/zyup/zyupDeleteWhite.png) no-repeat #C00;
     border-radius: 10px;
 }
-
-.zyupStepPanel1 .zyupField textarea {
-    padding: 10px;
-    resize: vertical;
-    min-height: 60px;
-}
-
-.zyupStepPanel1 .zyupThumbContainer {
-    position: absolute;
-    top: 0;
-    margin: 0;
-    right: 0;
-    padding-left: 20px;
-    border-left: #ccc 1px dotted;
-}
-.zyupStepPanel1 .zyupThumbContainer .zyupTip{
-    position: absolute;
-    right: 0;
-    top: 26px;
-    width: 250px;
-    text-align: right;
-}
-
-.zyupStepPanel1 .zyupThumb {
-    display: block;
-}
-
-.zyupStepPanel1 .zyupThumbUploadBtn {
+.zyupStepPanel1 .zyupButton {
     width: 100px;
     margin-bottom: 10px;
     display: inline-block;
@@ -192,8 +165,32 @@ body{
     padding: 0 10px;
     background: linear-gradient(to bottom, #efefef 0%, #cccccc 100%);
 }
-.zyupStepPanel1 .zyupThumbUploadBtn:hover {
+.zyupStepPanel1 .zyupButton:hover {
     background: #ccc;
+    cursor: pointer;
+}
+.zyupStepPanel1 .zyupField textarea {
+    padding: 10px;
+    resize: vertical;
+    min-height: 60px;
+}
+
+.zyupStepPanel1 .zyupRight {
+    position: absolute;
+    top: 0;
+    margin: 0;
+    right: 0;
+    padding-left: 20px;
+    border-left: #ccc 1px dotted;
+}
+.zyupStepPanel1 .zyupRight .zyupTip{
+    vertical-align: top;
+    top: 26px;
+    width: 250px;
+    text-align: right;
+}
+.zyupStepPanel1 .zyupRight .zyupThumbContainer .zyupThumb{
+    display: block;
 }
 
 /*****上传第二步******/
