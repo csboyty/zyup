@@ -3,11 +3,16 @@
 <head>
     <meta charset="utf-8">
     <title>上传组件</title>
+    <link type="text/css" rel="stylesheet" href="css/lib/jquery.toastmessage.css">
     <link type="text/css" rel="stylesheet" href="css/src/zyup.css">
     <script type="text/javascript" src="js/lib/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="js/lib/jquery.toastmessage.js"></script>
     <script type="text/javascript" src="js/lib/jquery.form.js"></script>
     <script type="text/javascript" src="js/lib/juicer-min.js"></script>
     <script type="text/javascript" src="js/lib/plupload.full.min.js"></script>
+    <script type="text/javascript" src="js/lib/qiniu.js"></script>
+    <script type="text/javascript" src="js/src/config.js"></script>
+    <script type="text/javascript" src="js/src/functions.js"></script>
     <script type="text/javascript" src="js/src/zyup.js"></script>
     <script type="text/javascript" src="js/src/zyupEvent.js"></script>
 </head>
@@ -22,7 +27,7 @@
     {@/each}
 </script>
 <!-- 上传完成的html模版-->
-<script type="text/template" id="zyupCompleteLiTpl">
+<script type="text/template" id="zyupMediaItemTpl">
     <li class="zyupMediaItem" data-media-id='${mediaId}'
         draggable="true">
         <img class="zyupSmallThumb" src="${thumbSrc}">

@@ -14,6 +14,12 @@ $(document).ready(function(){
     zyup.createThumbUploader();
     zyup.createImageUploader();
     zyup.createMediaThumbUploader();
+    zyup.createFileUploader();
+
+    zyup.createMediaUploader({type:config.mediaTypes.localVideo,browseButton:"zyupUploadMp4",
+        filter:config.uploader.filters.video});
+    zyup.createMediaUploader({type:config.mediaTypes._3d,browseButton:"zyupUpload3D",
+        filter:config.uploader.filters._3d});
 
 
     //标签删除事件
@@ -41,6 +47,16 @@ $(document).ready(function(){
 
         return false;
     });
+
+    $("#zyupFilename").click(function(){
+        if($(this).hasClass("zyupUnUploaded")!=-1&&zyup.fileWhichUpload){
+            zyup.fileUploadHandler.removeFile(zyup.fileWhichUpload);
+            zyup.fileUploadHandler.stop();
+            $(this).text("");
+        }
+
+    });
+
 
 
     //显示上传文件的菜单

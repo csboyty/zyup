@@ -5,7 +5,7 @@
  * Time: 下午6:01
  *上传（新建、修改）作品资源模块
  */
-var zyup=(function(){
+var zyup=(function(config,functions){
 
     var currentMediaId=0;
     var currentEditEntityId=0;
@@ -16,166 +16,6 @@ var zyup=(function(){
     var fileIdToMediaId={};
     var addedTags={}; //已经添加的标签
     var step2UploaderInit=false;
-
-    var config={
-        qiNiu:{
-            swfUrl:"/zyup/js/lib/Moxie.swf",
-            upTokenUrl:"#",
-            uploadDomain:"http://qiniu-plupload.qiniudn.com/",
-            bucketDomain:"http://xyedu.qiniudn.com/"
-        },
-        thumbs:{
-            defaultThumb:"images/app/zyupDefaultThumb.png",
-            smallThumb:"images/app/zyupDefaultSmallThumb.png"
-        },
-        ajaxUrls:{
-            getEntityDetail:"#",
-            getEntityMedias:"#",
-            uploadFormAction:"#",
-            uploadFormEditAction:"#"
-        },
-        uploader:{
-            url:"/zyup/upload.php",
-            swfUrl:"/zyup/js/plupload/plupload.flash.swf",
-            sizes:{
-                all:"5120m",
-                img:"2m"
-            },
-            filters:{
-                all:"*",
-                img:"jpg,JPG,jpeg,JPEG,png,PNG"
-            }
-        },
-        mediaTypes:{
-            thumb:"thumb",
-            image:"image",
-            ppt:"ppt",
-            _3d:"3d",
-            localVideo:"localVideo",
-            file:"file",
-            webVideo:"webVideo",
-            flash:"flash"
-        },
-        //单个媒体对象的信息
-        mediaObj:{
-            mediaPos:"pos",
-            mediaTitle:"mediaTitle",
-            mediaMemo:"mediaMemo",
-            mediaType:"mediaType",
-            mediaThumbFilename:"mediaThumbFilename",
-            mediaThumbFilePath:"mediaThumbFilepath",
-            mediaFilename:"mediaFilename",
-            mediaFilePath:"mediaFilepath"
-        },
-        mediaFilters:{
-            imageFilter:"jpg,JPG,gif,GIF,png,PNG,jpeg,JPEG",
-            pptFilter:"pptx",
-            _3dFilter:"zip",
-            videoFilter:"mp4",
-            fileFilter:"zip,pdf",
-            flashFilter:"swf"
-        },
-        sizes:{
-            maxMediaSize:"300m", //最大的媒体文件上传大小
-            maxImageSize:"2m" //最大的图片文件上传大小
-        },
-        messages:{
-            errorTitle:"错误提示",
-            successTitle:"成功提示",
-            deleteConfirm:"确定删除吗？",
-            operationSuccess:"操作成功！",
-            networkError:"网络连接失败，请稍后重试！",
-            filenameError:"文件名必须是数字下划线汉字字母,且不能以下划线开头！",
-            hasNoMedia:"没有上传媒体文件或者有上传错误的媒体文件，请上传或者删除后再预览！",
-            mediaHasNoUploaded:"有媒体文件未上传完毕！",
-            stepOneUnComplete:"标题、标签、描述、缩略图等没有填写完整！",
-            webVideoError:"请输入通用代码！",
-            pptHasNotUploaded:"此资源还没有被上传到资源服务器，暂时不能查看！",
-            pptUploadError:"此资源上传到资源服务器出错，无法查看！",
-            uploadSizeError:"最大文件大小",
-            uploadExtensionError:"只允许上传",
-            uploadIOError:"服务器端异常，请刷新后重试！"
-        }
-    };
-
-    /**
-     * 显示错误信息===============
-     * @param {String} title 信息的标题
-     * @param {String} content 信息的内容
-     */
-    function showErrorMessage(title,content){
-        console.log(content);
-    }
-
-    /**
-     * 显示成功的信息==================
-     * @param {String} title 信息的标题
-     * @param {String} content 信息的内容
-     */
-    function showSuccessMessage(title,content){
-        console.log(content);
-    }
-    function showLoading(){
-        $("#zyupLoading").removeClass("zyupHidden");
-    }
-    function hideLoading(){
-        $("#zyupLoading").addClass("zyupHidden");
-    }
-
-    /**
-     * ajax后台返回错误处理===================
-     * @param {Object} data 后台返回的数据对象
-     */
-    function ajaxReturnErrorHandler(data){
-        console.log(config.messages.networkError);
-        hideLoading();
-    }
-    function ajaxErrorHandler(){
-        console.log(config.messages.networkError);
-        hideLoading();
-    }
-
-
-    /**
-     * 格式化日期=====================
-     * @returns {string}  返回格式化的日期
-     */
-    function toDay(){
-
-        var date=new Date();
-
-        var year=date.getFullYear();
-
-        var month=date.getMonth()+1;
-
-        var day=date.getDate();
-
-        return year+"-"+month+"-"+day;
-
-    }
-
-
-    /**
-     * 产生随机数，可以自带前缀arguments[0]============
-     * @returns {string} 返回产生的字符串
-     */
-    function getRandom(){
-        var date = new Date();
-        var mo = (date.getMonth() + 1) < 10 ? ('0' + '' + (date.getMonth() + 1)) : date.getMonth() + 1;
-        var dd = date.getDate() < 10 ? ('0' + '' + date.getDate()) : date.getDate();
-        var hh = date.getHours() < 10 ? ('0' + '' + date.getHours()) : date.getHours();
-        var mi = date.getMinutes() < 10 ? ('0' + '' + date.getMinutes()) : date.getMinutes();
-        var ss = date.getSeconds() < 10 ? ('0' + '' + date.getSeconds()) : date.getSeconds();
-        var retValue = date.getFullYear() + '' + mo + '' + dd + '' + hh + '' + mi + '' + ss + '';
-        for (var j = 0; j < 4; j++) {
-            retValue += '' + parseInt(10 * Math.random()) + '';
-        }
-        if (arguments.length == 1) {
-            return arguments[0] + '' + retValue;
-        }else{
-            return retValue;
-        }
-    }
 
     /**
      * 拖拽函数====================
@@ -335,156 +175,6 @@ var zyup=(function(){
     }
 
     /**
-     * ==============================
-     * @param params
-     * @returns {plupload.Uploader}
-     */
-    function createUploader(params){
-        var uploader=new plupload.Uploader({
-            runtimes:"html5,flash",
-            multi_selection:params.multiSelection,
-            max_file_size:params.maxSize,
-            browse_button:params.uploadBtn,
-            container:params.uploadContainer,
-            multipart_params:params.multipartParams,
-            url:config.uploader.url,
-            flash_swf_url:config.uploader.swfUrl,
-            filters : [
-                {title : "Media files", extensions : params.filter}
-            ]
-        });
-
-        //初始化
-        uploader.init();
-
-        //文件添加事件
-        uploader.bind("FilesAdded", function (up, files) {
-            if(typeof params.filesAddedCb ==="function"){
-                params.filesAddedCb(files,up);
-            }
-
-            //开始上传
-            up.start();
-
-        });
-
-        //文件上传进度条事件
-        uploader.bind("UploadProgress", function (up, file) {
-            if(typeof params.progressCb ==="function"){
-                params.progressCb(file);
-            }
-        });
-
-        //出错事件
-        uploader.bind("Error", function (up, err) {
-
-            var message=err.message;
-            if(message.match("Init")==null){
-                if(message.match("size")){
-                    showErrorMessage(config.messages.errorTitle,
-                        config.messages.uploadSizeError+config.sizes.maxImageSize);
-                }else if(message.match("extension")){
-                    showErrorMessage(config.messages.errorTitle,
-                        config.messages.uploadExtensionError+config.mediaFilters.imageFilter);
-                }else{
-                    showErrorMessage(config.messages.errorTitle,config.messages.uploadIOError);
-                }
-            }
-            up.refresh();
-        });
-
-        //上传完毕事件
-        uploader.bind("FileUploaded", function (up, file, res) {
-            var response = JSON.parse(res.response);
-            if (response.success) {
-                if(typeof params.uploadedCb === "function"){
-                    params.uploadedCb(response,file,up);
-                }
-            } else {
-                showErrorMessage(config.messages.errorTitle,config.messages.uploadIOError);
-            }
-        });
-
-
-        return uploader;
-    }
-
-    /**
-     * =====================================
-     * @param params
-     * @returns {plupload.Uploader}
-     */
-    function createQiNiuUploader(params){
-        var uploader = Qiniu.uploader({
-            runtimes: 'html5,flash',    //上传模式,依次退化
-            browse_button: params.uploadBtn,       //上传选择的点选按钮，**必需**
-            uptoken_url:  config.qiNiu.upTokenUrl,
-            multi_selection:params.multiSelection,
-            domain: config.qiNiu.uploadDomain,
-            container: params.uploadContainer,//上传区域DOM ID，默认是browser_button的父元素，
-            filters: {
-                mime_types : [
-                    { title : "media files", extensions : params.filter }
-                ]
-                //max_file_size:'1m'
-            },
-            flash_swf_url:config.qiNiu.swfUrl,
-            multipart_params:params.multipartParams,
-            max_file_size: params.maxSize,    //最大文件体积限制,qiniu中需要写在这里，而不是卸载filters中
-            max_retries: 3,                   //上传失败最大重试次数
-            chunk_size: '4mb',                //分块上传时，每片的体积
-            auto_start: true,                 //选择文件后自动上传，若关闭需要自己绑定事件触发上传
-            init: {
-                'Init':function(up,info){
-                    //console.log(up.getOption("max_file_size"));
-                },
-                'FilesAdded': function(up, files) {
-                    if(typeof params.filesAddedCb ==="function"){
-                        params.filesAddedCb(files,up);
-                    }
-                },
-                'BeforeUpload':function(up,file){
-
-                },
-                'UploadProgress': function(up, file) {
-                    if(typeof params.progressCb ==="function"){
-                        params.progressCb(file);
-                    }
-                },
-                'FileUploaded': function(up, file, info) {
-                    var response = JSON.parse(info.response);
-                    response.url=config.qiNiu.bucketDomain + response.key;
-                    if(typeof params.uploadedCb === "function"){
-                        params.uploadedCb(response,file,up);
-                    }
-                },
-                'Error': function(up, err, errTip) {
-                    showErrorMessage("showErrorToast",errTip);
-
-                    up.refresh();
-                },
-                'Key': function(up, file) {
-
-                    // 若想在前端对每个文件的key进行个性化处理，可以配置该函数
-                    // 该配置必须要在 unique_names: false , save_key: false 时才生效
-                    var random=Math.floor(Math.random()*10+1)*(new Date().getTime());
-                    var filename=file.name;
-                    var extPos=filename.lastIndexOf(".");
-
-
-                    // do something with key here
-                    return random+filename.substring(extPos);
-
-                    //return file.name;
-                }
-            }
-        });
-
-        return uploader;
-    }
-
-
-    /**
      * 修改的时候初始化详细信息=====================
      * @param {Number} entityId 需要修改的id
      */
@@ -618,7 +308,7 @@ var zyup=(function(){
     function preview(){
         var data={};
         data.title=$("#zyupTitleInput").val();
-        data.date=toDay();
+        data.date=functions.formatDate();
         data.description=$("#zyupDescriptionTxt").val();
         data.medias=getSlidePages();
         var tpl=$("#zyupUploadPreviewTpl").html();
@@ -628,26 +318,22 @@ var zyup=(function(){
 
     return {
         drag:drag,
-        config:config,
         fileIdToMediaId:fileIdToMediaId,
+        fileUploadHandler:null,
+        fileWhichUpload:null,
         uploadedMedias:uploadedMedias,
-        showErrorMessage:showErrorMessage,
-        createUploader:createUploader,
 
         /**
          * ===========================
          */
         createThumbUploader:function(){
-            createUploader({
-                maxSize:config.sizes.maxImageSize,
-                filter:config.mediaFilters.imageFilter,
+            functions.createQiNiuUploader({
+                maxSize:config.uploader.sizes.img,
+                filter:config.uploader.filters.img,
                 uploadBtn:"zyupThumbUploadBtn",
-                multipartParams:null,
                 multiSelection:false,
                 uploadContainer:"zyupThumbContainer",
-                filesAddedCb:null,
-                progressCb:null,
-                uploadedCb:function(response,file){
+                uploadedCb:function(response,file,up){
                     //var imgSrc=response.url;
                     //var imgExt=imgSrc.substring(imgSrc.lastIndexOf("."),imgSrc.length);
                     //var imgSrc=imgSrc.substring(0,imgSrc.lastIndexOf("."))+config.imgSize.middle+img_ext;
@@ -661,11 +347,10 @@ var zyup=(function(){
          * ===========================
          */
         createImageUploader:function(){
-            createUploader({
-                maxSize:config.sizes.maxImageSize,
-                filter:config.mediaFilters.imageFilter,
+            functions.createQiNiuUploader({
+                maxSize:config.uploader.sizes.img,
+                filter:config.uploader.filters.img,
                 uploadBtn:"zyupUploadImage",
-                multipartParams:null,
                 multiSelection:true,
                 uploadContainer:"zyupUploadImageContainer",
                 filesAddedCb:function(files){
@@ -675,7 +360,7 @@ var zyup=(function(){
                     for (var i = 0; i < fileLength; i++) {
 
 
-                        mediaId = getRandom("random_");
+                        mediaId = functions.getRandom("random_");
                         fileIdToMediaId[files[i]["id"]] = mediaId;
 
                         //组装显示的数据
@@ -686,7 +371,7 @@ var zyup=(function(){
                         };
 
                         //显示列表项
-                        var tpl = $("#zyupCompleteLiTpl").html();
+                        var tpl = $("#zyupMediaItemTpl").html();
                         var html = juicer(tpl, data);
                         $("#zyupMediaList").append(html);
                     }
@@ -707,14 +392,39 @@ var zyup=(function(){
             });
         },
         /**
+         *附件上传句柄
+         */
+        createFileUploader:function(){
+            var me=this;
+            this.fileUploadHandler=functions.createQiNiuUploader({
+                maxSize:config.uploader.sizes.all,
+                filter:config.uploader.filters.zip,
+                uploadBtn:"zyupFileUploadBtn",
+                uploadContainer:"zyupFileContainer",
+                filesAddedCb:function(files,up){
+                    me.fileWhichUpload=files[0];
+                    $("#zyupFilename").addClass("zyupUnUploaded");
+                },
+                progressCb:function(file){
+                    $("#zyupFilename").text(file.name+"----"+file.percent+"%"+"--点击取消");
+                },
+                uploadedCb:function(info,file,up){
+                    me.fileWhichUpload=null;
+                    $("#zyupFilename").text(file.name).removeClass("zyupUnUploaded");
+                    $("#zyupFilenameValue").val(file.name);
+                    $("#zyupFileUrl").val(info.url);
+
+                }
+            });
+        },
+        /**
          * ========================
          */
         createMediaUploader:function(params){
-            createUploader({
-                maxSize:config.sizes.maxMediaSize,
+            functions.createQiNiuUploader({
+                maxSize:config.uploader.sizes.all,
                 filter:params.filter,
                 uploadBtn:params.browseButton,
-                multipartParams:null,
                 multiSelection:false,
                 uploadContainer:"zyupAddMediaMenu",
                 filesAddedCb:function(files,up){
@@ -741,9 +451,9 @@ var zyup=(function(){
          * ==========================
          */
         createMediaThumbUploader:function(){
-            createUploader({
-                maxSize:config.sizes.maxImageSize,
-                filter:config.mediaFilters.imageFilter,
+            functions.createQiNiuUploader({
+                maxSize:config.uploader.sizes.img,
+                filter:config.uploader.filters.img,
                 uploadBtn:"zyupUpdateThumbButton",
                 multipartParams:null,
                 multiSelection:false,
@@ -833,7 +543,7 @@ var zyup=(function(){
          * ==================
          */
         deleteBindFile:function(){
-            if(confirm(config.messages.deleteConfirm)){
+            if(confirm(config.messages.confirmDelete)){
                 if(currentMediaUploader){
                     currentMediaUploader.removeFile(uploadingMediaFile);
                     currentMediaUploader.stop();
@@ -864,8 +574,9 @@ var zyup=(function(){
          */
         stepHandler:function(stepId){
             if(stepId!="#zyupStep1"){
-                if($("#zyupTitleInput").val()==""||$("#zyupThumbName").val()==""||$("#zyupTagList li").length==0){
-                    showErrorMessage(config.messages.errorTitle,config.messages.stepOneUnComplete);
+                if($("#zyupTitleInput").val()==""||$("#zyupThumbName").val()==""||
+                    $("#zyupFilenameValue").val()==""||$("#zyupTagList li").length==0){
+                    $().toastmessage("showErrorToast",config.messages.stepOneUnComplete);
                     return false;
                 }
             }
@@ -880,18 +591,18 @@ var zyup=(function(){
 
                         if(uploadedMedias[obj][config.mediaObj.mediaThumbFilename].indexOf("%")!=-1&&
                             uploadedMedias[obj][config.mediaObj.mediaThumbFilename].indexOf(".")==-1){
-                            showErrorMessage(config.messages.errorTitle,config.messages.mediaHasNoUploaded);
+                            $().toastmessage("showErrorToast",config.messages.stepTwoUnComplete);
                             return false;
                         }
 
                         if(uploadedMedias[obj][config.mediaObj.mediaFilename].indexOf("%")!=-1&&
                             uploadedMedias[obj][config.mediaObj.mediaFilename].indexOf(".")==-1){
-                            showErrorMessage(config.messages.errorTitle,config.messages.mediaHasNoUploaded);
+                            $().toastmessage("showErrorToast",config.messages.stepTwoUnComplete);
                             return false;
                         }
                     }
                 }else{
-                    showErrorMessage(config.messages.errorTitle,config.messages.hasNoMedia);
+                    $().toastmessage("showErrorToast",config.messages.stepTwoUnComplete);
                     return false;
                 }
 
@@ -902,14 +613,14 @@ var zyup=(function(){
             showStepPanel(stepId);
 
             //一定要在页面显示后初始化，不然ie里面无法使用上传插件
-            if(stepId=="#zyupStep2"&&!step2UploaderInit){
+            /*if(stepId=="#zyupStep2"&&!step2UploaderInit){
                 this.createMediaUploader({type:config.mediaTypes.localVideo,browseButton:"zyupUploadMp4",
-                    filter:config.mediaFilters.videoFilter});
+                    filter:config.uploader.uploader.video});
                 this.createMediaUploader({type:config.mediaTypes._3d,browseButton:"zyupUpload3D",
-                    filter:config.mediaFilters._3dFilter});
+                    filter:config.uploader._3d});
 
                 step2UploaderInit=true;
-            }
+            }*/
         },
 
         /**
@@ -918,7 +629,7 @@ var zyup=(function(){
         ajaxUploadFormHandler:function(){
             var url=config.ajaxUrls.uploadFormAction;
             var assets=[];
-            showLoading();
+            functions.showLoading();
             $(".zyupMediaItem").each(function(index,m){
                 uploadedMedias[$(this).data("media-id")][config.mediaObj.mediaPos]=index+1;
                 assets.push(uploadedMedias[$(this).data("media-id")]);
@@ -1050,5 +761,5 @@ var zyup=(function(){
         }
 
     }
-})();
+})(config,functions);
 
